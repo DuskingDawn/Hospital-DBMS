@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mysql:latest
+    container_name: mysql_container
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root12
+    volumes:
+      - C:/Users/Sneha/Documents/Projects/Serenity_Hospital/ssl:/etc/mysql/ssl
+      - C:/Users/Sneha/Documents/Projects/Serenity_Hospital/my.ini:/etc/mysql/conf.d/my.cnf
+      - C:/Users/Sneha/Documents/Projects/Serenity_Hospital/sql:/docker-entrypoint-initdb.d
+      - C:/Users/Sneha/Documents/Projects/Serenity_Hospital/keyring:/var/lib/mysql-keyring
+    command: >
+      --ssl-ca=/etc/mysql/ssl/ca-cert.pem
+      --ssl-cert=/etc/mysql/ssl/server-cert.pem
+      --ssl-key=/etc/mysql/ssl/server-key.pem
